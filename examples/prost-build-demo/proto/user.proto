@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package demo;
+
+import "uuid.proto";
+
+message User {
+  uuid.Uuid id = 1;
+  string name = 2;
+  repeated uuid.Uuid group_ids = 3;
+}

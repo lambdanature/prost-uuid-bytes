@@ -1,0 +1,47 @@
+[package]
+name = "prost-uuid-bytes"
+version = "0.1.0"
+edition = "2021"
+description = "ProstUuid newtype around uuid::Uuid encoded as a protobuf bytes field, printed and validated in RFC 9562 form"
+authors = ["Michael Wildpaner <mike@wildpaner.com>"]
+license = "MIT"
+repository = "https://github.com/lambdanature/prost-uuid-bytes"
+keywords = ["prost", "uuid", "protobuf", "grpc"]
+categories = ["encoding", "rust-patterns"]
+include = ["src/**", "proto/**", "README.md", "LICENSE"]
+
+[features]
+default = ["serde"]
+serde = ["dep:serde", "uuid/serde"]
+
+[dependencies]
+prost = "0.14"
+uuid = "1"
+derive_more = { version = "2", default-features = false, features = [
+    "as_ref",
+    "constructor",
+    "deref",
+    "deref_mut",
+    "display",
+    "from",
+    "from_str",
+    "into",
+] }
+serde = { version = "1", optional = true, features = ["derive"] }
+
+[dev-dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "1"
+uuid = { version = "1", features = ["v3", "v4", "v5", "v7", "v8"] }
+
+[[example]]
+name = "json"
+required-features = ["serde"]
+
+[[example]]
+name = "toml"
+required-features = ["serde"]
+
+[workspace]
+members = ["examples/prost-build-demo"]

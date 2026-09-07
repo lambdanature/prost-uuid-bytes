@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package uuid;
+
+// A UUID (RFC 9562) carried as its 16 raw bytes in network byte order.
+//
+// Map this message to `prost_uuid_bytes::ProstUuid` in build.rs:
+//
+//   prost_build::Config::new()
+//       .extern_path(".uuid.Uuid", "::prost_uuid_bytes::ProstUuid")
+message Uuid {
+  // Exactly 16 bytes. Decoding any other length is an error.
+  bytes value = 1;
+}
